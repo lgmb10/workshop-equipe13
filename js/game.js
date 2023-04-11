@@ -2,11 +2,24 @@ const gameArea = document.querySelector('.game-area');
 const player = document.querySelector('.player');
 let score = 0;
 let isGameOver = false;
+const startTime = new Date();
+let speed = 5;
+let previousDelay = startTime;
 
-// vitesse de la box en fonction du score
 function getSpeed() {
-    let speed = 5;
-    speed += score / 10;
+    let delay = Math.ceil((new Date().getTime() - startTime.getTime()) / 1000);
+    console.log("delay" + delay);
+    console.log("previousDelay" + previousDelay);
+    console.log("speed" + speed);
+
+
+    if (previousDelay != delay) {
+        let tmp;
+        delay % 10 == 0 ? tmp = speed + 0.5 : tmp = speed;
+        speed = tmp;
+        previousDelay = delay;
+    }
+
     return speed;
 }
 
@@ -40,9 +53,7 @@ function createBox() {
 
 }
 
-//si le user clique alors la premiere box saute
-document.addEventListener('click', (e) => {
-    console.log(e);
+function setOnClick(e) {
     let boxs = document.querySelectorAll('.box');
     let box = boxs[0];
     if (box) {
@@ -51,6 +62,17 @@ document.addEventListener('click', (e) => {
             box.classList.remove('jump');
         }, 1000);
     }
+}
+
+//si le user clique alors la premiere box saute
+document.addEventListener('keydown', (e) => {
+    if (e.code == "Space") setOnClick(e);
+
+});
+
+//si le user clique alors la premiere box saute
+document.addEventListener('click', (e) => {
+    setOnClick(e);
 
 });
 
@@ -73,4 +95,4 @@ function gameOver() {
 
 const boxInterval = setInterval(() => {
     createBox();
-}, 500);
+}, 2000);
