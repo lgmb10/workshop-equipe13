@@ -105,12 +105,18 @@ function addPotionBox() {
             clearInterval(potionBoxInterval);
             potionBox.remove();
             // Faire quelque chose lorsque le joueur touche la boîte bonus
+            if (speed > 1) {
+                speed -= 1;
+                setTimeout(() => {
+                    speed += 1;
+                }, 5000);
+            }
             console.log("Vous avez obtenu un bonus !");
         }
     }, 10);
 }
 
-function setOnClick(e) {
+function setOnClick() {
     let boxs = document.querySelectorAll('.box');
     for (let i = 0; i < boxs.length; i++) {
         if (!boxs[i].classList.contains('jump')) {
@@ -153,6 +159,15 @@ function gameOver() {
 }
 
 
-const boxInterval = setInterval(() => {
+// generer des boxs avec des intervalles de temps aleatoires
+function generateRandomBox() {
+    if (isGameOver) return;
     createBox();
-}, 500);
+    setTimeout(generateRandomBox, generateRandomTime());
+}
+
+function generateRandomTime() {
+    return (Math.random() * 100 + 500);
+}
+
+generateRandomBox();
