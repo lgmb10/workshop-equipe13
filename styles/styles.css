@@ -63,14 +63,17 @@ input {
   background-size: cover;
 }
 .game-page .jump {
-  animation: jump-animation 1s ease-in-out;
+  animation: jump-animation 0.4s ease;
 }
 @keyframes jump-animation {
   0% {
     transform: translateY(0);
   }
+  25% {
+    transform: translateY(-50px);
+  }
   50% {
-    transform: translateY(-100px);
+    transform: translateY(-75px);
   }
   75% {
     transform: translateY(-50px);
