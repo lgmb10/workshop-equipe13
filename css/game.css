@@ -31,3 +31,14 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  .jump {
+    animation: jump-animation 1s ease-in-out;
+  }
+  
+  @keyframes jump-animation {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-100px); }
+    75% { transform: translateY(-50px); }
+    100% { transform: translateY(0); }
+  }
