@@ -4,6 +4,7 @@ let score = 0;
 let isGameOver = false;
 const startTime = new Date();
 let speed = 5;
+let life = 3;
 let previousDelay = startTime;
 
 function getSpeed() {
@@ -24,6 +25,8 @@ function createBox() {
         addBonusBox();
     } else if (Math.random() < 0.10 && Math.random() > 0.05) {
         addPotionBox();
+    } else if (Math.random() < 0.15 && Math.random() > 0.10 && life < 3) {
+        addHeart();
     } else {
         const box = document.createElement('div');
         box.classList.add('box');
@@ -46,8 +49,14 @@ function createBox() {
             }
 
             if (isCollide(box)) {
-                gameOver();
+                life -= 1;
+                updateLife();
+                console.log(life);
+                if (life === 0) {
+                    gameOver();
+                }
                 clearInterval(moveBox);
+                gameArea.removeChild(box);
             }
         }, 10);
     }
@@ -116,6 +125,35 @@ function addPotionBox() {
     }, 10);
 }
 
+function addHeart() {
+    console.log("addHeart");
+    // Créer une div pour la boîte bonus
+    let heart = document.createElement("div");
+    heart.classList.add("box", "getHeart");
+    let x = gameArea.offsetWidth;
+
+    // Ajouter la boîte bonus à la zone de jeu
+    gameArea.appendChild(heart);
+
+    // Déplacer la boîte bonus vers la gauche jusqu'à sortir de la zone de jeu
+    let heartInterval = setInterval(function () {
+        x -= getSpeed();
+        heart.style.left = `${x}px`;
+
+        // Vérifier si la boîte bonus touche le joueur
+        if (isCollide(heart)) {
+            clearInterval(heartInterval);
+            heart.remove();
+            // Faire quelque chose lorsque le joueur touche la boîte bonus
+            if (life < 3) {
+                life += 1;
+                updateLife();
+                console.log("Vous avez obtenu un bonus !");
+            }
+        }
+    }, 10);
+}
+
 function setOnClick() {
     let boxs = document.querySelectorAll('.box');
     for (let i = 0; i < boxs.length; i++) {
@@ -161,6 +199,7 @@ function gameOver() {
 
 // generer des boxs avec des intervalles de temps aleatoires
 function generateRandomBox() {
+    updateScore();
     if (isGameOver) return;
     createBox();
     setTimeout(generateRandomBox, generateRandomTime());
@@ -169,5 +208,27 @@ function generateRandomBox() {
 function generateRandomTime() {
     return (Math.random() * 100 + 500);
 }
+
+function updateLife() {
+    let heartCount = life;
+
+    // Récupère les éléments HTML des cœurs
+    const hearts = document.querySelectorAll(".heart");
+
+    // Met à jour les cœurs en fonction du nombre de vies restantes
+    for (let i = 0; i < hearts.length; i++) {
+        if (i >= heartCount) {
+            hearts[i].classList.add("heartEmpty");
+        } else {
+            hearts[i].classList.remove("heartEmpty");
+        }
+    }
+}
+
+function updateScore() {
+    const  scoreDiv = document.querySelector(".score");
+    scoreDiv.innerHTML = score;
+}
+
 
 generateRandomBox();

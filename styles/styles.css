@@ -20,7 +20,6 @@ input {
   display: inline-block;
   cursor: pointer;
 }
-
 .button:hover {
   background-color: #a45b21;
   border-color: #592b0c;
@@ -31,19 +30,11 @@ input {
   width: 95%;
   margin-inline: auto;
   padding-block: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
   gap: 1rem;
 }
-
 .game-page .game-area {
   position: relative;
   width: 95%;
@@ -52,18 +43,15 @@ input {
   height: 200px;
   border: 5px solid #592b0c;
 }
-
 .game-page .player {
   position: absolute;
   bottom: 0;
   left: 0%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   width: 30px;
   height: 30px;
   background-color: red;
 }
-
 .game-page .box {
   position: absolute;
   bottom: 0;
@@ -74,50 +62,23 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .game-page .jump {
-  -webkit-animation: jump-animation 1s ease-in-out;
-          animation: jump-animation 1s ease-in-out;
+  animation: jump-animation 1s ease-in-out;
 }
-
-@-webkit-keyframes jump-animation {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-  50% {
-    -webkit-transform: translateY(-100px);
-            transform: translateY(-100px);
-  }
-  75% {
-    -webkit-transform: translateY(-50px);
-            transform: translateY(-50px);
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-}
-
 @keyframes jump-animation {
   0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
   50% {
-    -webkit-transform: translateY(-100px);
-            transform: translateY(-100px);
+    transform: translateY(-100px);
   }
   75% {
-    -webkit-transform: translateY(-50px);
-            transform: translateY(-50px);
+    transform: translateY(-50px);
   }
   100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
-
 .game-page .bonus {
   position: absolute;
   bottom: 0;
@@ -128,7 +89,6 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .game-page .potion {
   position: absolute;
   bottom: 0;
@@ -139,4 +99,46 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
-/*# sourceMappingURL=styles.css.map */
+.game-page .getHeart {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 30px;
+  height: 30px;
+  background-image: url("../src/img/heart.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.game-page .heart {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../src/img/heart.png");
+  background-size: contain;
+}
+.game-page .heartEmpty {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../src/img/heartEmpty.png") !important;
+  background-size: contain;
+}
+.game-page .scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  height: 50px;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-size: 20px;
+  margin-inline: auto;
+}
+.game-page .score {
+  font-weight: bold;
+}
+.game-page .hearts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=styles.css.map */
