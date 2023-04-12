@@ -203,6 +203,9 @@ function isCollide(box) {
 function gameOver() {
     isGameOver = true;
     alert(`Game over!\nScore: ${score}`);
+    localStorage.setItem('score', score);
+    window.location = 'end.html'
+
 }
 
 
