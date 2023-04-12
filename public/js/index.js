@@ -25,7 +25,7 @@ let posRun = 1;
 let posHurt = 1;
 let posDeath = 1;
 let playerSizeMultiplier = 2.5
-let gameSpeed = 4;
+let gameSpeed = 4.5;
 let time = 0.0;
 let gameOnGoing = false;
 let isAlive = true;
@@ -115,14 +115,16 @@ function handleItems() {
                     health++;
                     createShortLivedMessage("Vous avez obtenu une vie supplémentaire !");
                 }
-                // else if (item.type == 'reduceSpeed') {
-                //     if (!slowed) {
-                //         slowedValue = gameSpeed * 0.3;
-                //         gameSpeed = gameSpeed * 0, 7;
-                //         slowed = true;
-                //     }
-                //     slowStartTime = time;
-                // }
+                else if (item.type == 'reduceSpeed') {
+                    if (gameSpeed > 4) {
+                        createShortLivedMessage("La vitesse est ralenti pendant un court instant !");
+                        let oldSpeed = gameSpeed;
+                        gameSpeed = gameSpeed * 0.7;
+                        setTimeout(() => {
+                            gameSpeed = oldSpeed;
+                        }, 5000);
+                    }
+                }
                 else if (item.type == 'coin') {
                     score += 5;
                     scoreDiv.innerHTML = score;
@@ -171,7 +173,7 @@ function start() {
             if (isHurt) {
                 posHurt++;
             } else {
-                if (gameSpeed >= 7) {
+                if (gameSpeed >= 6) {
                     posRun++;
                 } else {
                     posWalk++;
@@ -206,7 +208,7 @@ function start() {
     }, interval);
     setInterval(() => {
         gameSpeed += 0.5;
-    }, 10000)
+    }, 8000)
     function getRandBackground() {
         return Math.floor((Math.random() * 4) + 1)
     }
@@ -220,12 +222,12 @@ function start() {
             BACKGROUND.id = newId;
         }
     }, 30000)
-    // setInterval(() => {
-    //     if (slowed && slowStartTime + 5 <= time) {
-    //         slowed = false;
-    //         gameSpeed = gameSpeed + slowedValue;
-    //     }
-    // }, 1000)
+    setInterval(() => {
+        if (slowed && slowStartTime + 5 <= time) {
+            slowed = false;
+            gameSpeed = gameSpeed + slowedValue;
+        }
+    }, 1000)
 }
 
 function game() {

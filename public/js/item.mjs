@@ -1,12 +1,12 @@
 const item = {
-    x:0,
-    y:135,
-    originWidth:160,
-    originHeight:160,
-    width:50,
-    height:50,
-    jumping:false,
-    jumpWay:'up',
+    x: 0,
+    y: 135,
+    originWidth: 160,
+    originHeight: 160,
+    width: 50,
+    height: 50,
+    jumping: false,
+    jumpWay: 'up',
     image: new Image(),
     type: 'box'
 }
@@ -26,21 +26,21 @@ reduceSpeed.src = "src/img/potionVitesse.png";
 const coin = new Image();
 coin.src = "src/img/coin.png";
 
-export function createItem(width,health) {
-    var newItem = {...item};
+export function createItem(width, health) {
+    var newItem = { ...item };
     newItem.x = width;
-    let randType = Math.floor(Math.random()*100);
+    let randType = Math.floor(Math.random() * 100);
     if (health < 3 && randType <= 5) {
         newItem.type = 'heart';
         newItem.image = heart;
     } else if (randType > 5 && randType <= 10) {
         newItem.type = 'coin',
-        newItem.image = coin;
+            newItem.image = coin;
     }
-    // else if (randType > 10 && randType <= 50) {
-    //     newItem.type = 'reduceSpeed',
-    //     newItem.image = reduceSpeed;
-    // } 
+    else if (randType > 10 && randType <= 13) {
+        newItem.type = 'reduceSpeed',
+            newItem.image = reduceSpeed;
+    }
     else {
         var rand = Math.random();
         if (rand >= 0.5) {
@@ -52,7 +52,7 @@ export function createItem(width,health) {
     return newItem;
 }
 
-export function drawItem(item,coo,context) {
+export function drawItem(item, coo, context) {
     context.drawImage(
         item.image,
         0,
@@ -66,7 +66,7 @@ export function drawItem(item,coo,context) {
     );
 }
 
-export function isColision(item,playerPeace) {
+export function isColision(item, playerPeace) {
     if (item.x > 49 && item.y >= 100) {         //vérfifie si derrière ou au dessus
         if ((playerPeace == "walk" && item.x <= 80) || playerPeace == "run" && item.x <= 88) { //vérifie si avant
             return true;
