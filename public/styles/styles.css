@@ -10,7 +10,8 @@ body {
 *,
 input {
   font-family: "VT323", monospace;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .button {
@@ -24,25 +25,30 @@ input {
   text-decoration: none;
   text-align: center;
 }
+
 .button.pause {
   cursor: initial;
   display: none;
 }
+
 .button.active {
   display: block;
   background-color: #a45b21;
   border-color: #592b0c;
   outline: 5px solid #a45b21;
 }
+
 .button:hover {
   background-color: #a45b21;
   border-color: #592b0c;
   outline: 5px solid #a45b21;
 }
+
 .button.inside-form {
   background-color: #a45b21;
   border-color: #592b0c;
 }
+
 .button.inside-form:hover {
   background-color: #592b0c;
   border-color: #a45b21;
@@ -52,13 +58,22 @@ input {
 .main-form {
   position: relative;
   height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .main-form > .button {
   margin-top: 2rem;
 }
+
 .main-form::before {
   content: "";
   position: absolute;
@@ -77,23 +92,42 @@ input {
   width: 95%;
   margin-inline: auto;
   padding-block: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   gap: 1rem;
 }
+
+.game-page .menu p {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding-left: 1rem;
+}
+
 .game-page .ingame-message {
   width: 100%;
   text-align: center;
 }
+
 .game-page .ingame-message p {
   opacity: 0;
   font-size: 1.5rem;
+  -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
 }
+
 .game-page .ingame-message p.show {
   opacity: 1;
 }
+
 .game-page .game-area {
   position: relative;
   width: 95%;
@@ -102,15 +136,18 @@ input {
   height: 200px;
   border: 5px solid #592b0c;
 }
+
 .game-page .player {
   position: absolute;
   bottom: 0;
   left: 0%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 30px;
   height: 30px;
   background-color: red;
 }
+
 .game-page .box {
   position: absolute;
   bottom: 0;
@@ -121,26 +158,58 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .game-page .jump {
-  animation: jump-animation 0.4s ease;
+  -webkit-animation: jump-animation 0.4s ease;
+          animation: jump-animation 0.4s ease;
 }
-@keyframes jump-animation {
+
+@-webkit-keyframes jump-animation {
   0% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
   25% {
-    transform: translateY(-50px);
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
   }
   50% {
-    transform: translateY(-75px);
+    -webkit-transform: translateY(-75px);
+            transform: translateY(-75px);
   }
   75% {
-    transform: translateY(-50px);
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
   }
   100% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
 }
+
+@keyframes jump-animation {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  25% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+  }
+  50% {
+    -webkit-transform: translateY(-75px);
+            transform: translateY(-75px);
+  }
+  75% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
 .game-page .bonus {
   position: absolute;
   bottom: 0;
@@ -151,6 +220,7 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .game-page .potion {
   position: absolute;
   bottom: 0;
@@ -161,6 +231,7 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .game-page .getHeart {
   position: absolute;
   bottom: 0;
@@ -171,6 +242,7 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .game-page .heart {
   display: inline-block;
   width: 20px;
@@ -178,6 +250,7 @@ input {
   background-image: url("../src/img/heart.png");
   background-size: contain;
 }
+
 .game-page .heartEmpty {
   display: inline-block;
   width: 20px;
@@ -185,45 +258,57 @@ input {
   background-image: url("../src/img/heartEmpty.png") !important;
   background-size: contain;
 }
+
 .game-page .scoreboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 95%;
   height: 50px;
   padding: 1rem;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-size: 20px;
   margin-inline: auto;
 }
+
 .game-page .score {
   font-weight: bold;
   font-size: 2rem;
 }
+
 .game-page .hearts {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.game-page .menu2 {
-  width: 95%;
-  padding-block: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.game-page .time {
-  margin-left: 50px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .score-page {
   height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
 }
+
 .score-page::before {
   content: "";
   position: absolute;
@@ -237,15 +322,18 @@ input {
   background-repeat: no-repeat;
   background-image: url("../src/img/score_background.jpeg");
 }
+
 .score-page section {
   padding-block: 2rem;
 }
+
 .score-page section .score-table {
   width: 30rem;
   margin-inline: auto;
   background-color: #a45b21;
   border: 5px solid #592b0c;
 }
+
 .score-page section .score-table h1 {
   text-align: center;
   color: #ffffff;
@@ -254,65 +342,97 @@ input {
   margin: 0;
   border-bottom: 5px solid #592b0c;
 }
+
 .score-page section .score-list,
 .score-page section .score-title {
   padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-bottom: 3px solid #592b0c;
 }
+
 .score-page section .score-list p,
 .score-page section .score-title p {
   padding-inline: 0.5rem;
 }
+
 .score-page section .score-title {
   color: #ffffff;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   text-transform: uppercase;
   font-size: 1.3rem;
 }
+
 .score-page section .score-list {
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   list-style: none;
   list-style-position: inside;
   height: 50vh;
   overflow-y: scroll;
   margin: 0;
 }
+
 .score-page section .score-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   border-bottom: 3px solid #592b0c;
   color: #ffffff;
 }
+
 .score-page section .score-list li:last-child {
   border: none;
 }
+
 .score-page section .score-list li:nth-child(1) p:last-child::before, .score-page section .score-list li:nth-child(2) p:last-child::before, .score-page section .score-list li:nth-child(3) p:last-child::before {
   content: "🥇";
   font-size: 2rem;
   position: absolute;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   left: 0;
   top: 50%;
 }
+
 .score-page section .score-list li:nth-child(2) p:last-child::before {
   content: "🥈";
 }
+
 .score-page section .score-list li:nth-child(3) p:last-child::before {
   content: "🥉";
 }
+
 .score-page section .score-list li p:first-child {
   width: 70%;
 }
+
 .score-page section .score-list li p:last-child {
   position: relative;
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   text-align: right;
 }
+
 .score-page section .menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   gap: 1rem;
   padding-block: 1rem;
 }
@@ -323,30 +443,46 @@ form {
   width: 70%;
   max-width: 40rem;
   margin-inline: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 2rem;
   padding-bottom: 2rem;
 }
+
 form h2 {
   color: #ffffff;
   text-align: center;
   font-size: 2rem;
   margin-bottom: 0;
 }
+
 form .input-container {
   width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
 form .input-container label {
   color: #ffffff;
   padding-bottom: 0.3rem;
   font-size: 1.3rem;
 }
-form input[type=text],
-form input[type=password] {
+
+form input[type="text"],
+form input[type="password"] {
   width: 100%;
   margin: 0;
   padding: 0.5rem;
@@ -355,22 +491,38 @@ form input[type=password] {
   color: #592b0c;
   font-size: 1.3rem;
 }
-form input[type=text]::-moz-placeholder, form input[type=password]::-moz-placeholder {
+
+form input[type="text"]::-webkit-input-placeholder,
+form input[type="password"]::-webkit-input-placeholder {
   color: #ffffff;
 }
-form input[type=text]::placeholder,
-form input[type=password]::placeholder {
+
+form input[type="text"]:-ms-input-placeholder,
+form input[type="password"]:-ms-input-placeholder {
   color: #ffffff;
 }
+
+form input[type="text"]::-ms-input-placeholder,
+form input[type="password"]::-ms-input-placeholder {
+  color: #ffffff;
+}
+
+form input[type="text"]::placeholder,
+form input[type="password"]::placeholder {
+  color: #ffffff;
+}
+
 form input {
   outline: none;
 }
+
 form span {
   color: #ffffff;
   font-size: 1.3rem;
 }
 
 .main-title-container {
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin-inline: auto;
@@ -378,14 +530,17 @@ form span {
   text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 2rem;
 }
+
 .main-title-container p {
   margin: 0;
   font-size: 1.5rem;
 }
+
 .main-title-container h4 {
   margin: 0;
   font-size: 1.5rem;
 }
+
 .main-title-container .main-title {
   color: #ffffff;
   line-height: 1;
@@ -399,8 +554,16 @@ form span {
   -webkit-background-clip: text;
   background-clip: text;
   background-position: 0 0;
-  animation: animate 20s linear 2s infinite alternate;
+  -webkit-animation: animate 20s linear 2s infinite alternate;
+          animation: animate 20s linear 2s infinite alternate;
 }
+
+@-webkit-keyframes animate {
+  100% {
+    background-position: -500px 0;
+  }
+}
+
 @keyframes animate {
   100% {
     background-position: -500px 0;
@@ -408,12 +571,23 @@ form span {
 }
 
 .accueil {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 2rem;
 }
+
 .accueil .button {
   width: 10rem !important;
-}/*# sourceMappingURL=styles.css.map */
+}
+/*# sourceMappingURL=styles.css.map */
