@@ -24,7 +24,7 @@
         margin: 0;
         color: transparent;
         -webkit-text-stroke: 1px $white;
-        background: url("../assets/pattern.png");
+        background: url("../src/img/pattern.png");
         -webkit-background-clip: text;
         background-clip: text;
         background-position: 0 0;
@@ -35,5 +35,17 @@
         100% {
             background-position: -500px 0;
         }
+    }
+}
+
+.accueil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    .button {
+        width: 10rem !important;
     }
 }

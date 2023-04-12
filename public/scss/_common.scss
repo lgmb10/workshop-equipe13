@@ -19,6 +19,8 @@ input {
     color: $white;
     display: inline-block;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
 
     &.pause {
         cursor: initial;
@@ -53,6 +55,13 @@ input {
 .main-form {
     position: relative;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > .button {
+        margin-top: 2rem;
+    }
 
     &::before {
         content: "";

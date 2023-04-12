@@ -22,6 +22,8 @@ input {
   color: #ffffff;
   display: inline-block;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
 }
 
 .button.pause {
@@ -56,6 +58,20 @@ input {
 .main-form {
   position: relative;
   height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main-form > .button {
+  margin-top: 2rem;
 }
 
 .main-form::before {
@@ -369,7 +385,7 @@ input {
   border: none;
 }
 
-.score-page section .score-list li:nth-child(2) p:last-child::before, .score-page section .score-list li:nth-child(3) p:last-child::before, .score-page section .score-list li:nth-child(4) p:last-child::before {
+.score-page section .score-list li:nth-child(1) p:last-child::before, .score-page section .score-list li:nth-child(2) p:last-child::before, .score-page section .score-list li:nth-child(3) p:last-child::before {
   content: "🥇";
   font-size: 2rem;
   position: absolute;
@@ -379,11 +395,11 @@ input {
   top: 50%;
 }
 
-.score-page section .score-list li:nth-child(3) p:last-child::before {
+.score-page section .score-list li:nth-child(2) p:last-child::before {
   content: "🥈";
 }
 
-.score-page section .score-list li:nth-child(4) p:last-child::before {
+.score-page section .score-list li:nth-child(3) p:last-child::before {
   content: "🥉";
 }
 
@@ -527,7 +543,7 @@ form span {
   margin: 0;
   color: transparent;
   -webkit-text-stroke: 1px #ffffff;
-  background: url("../assets/pattern.png");
+  background: url("../src/img/pattern.png");
   -webkit-background-clip: text;
   background-clip: text;
   background-position: 0 0;
@@ -545,5 +561,26 @@ form span {
   100% {
     background-position: -500px 0;
   }
+}
+
+.accueil {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+}
+
+.accueil .button {
+  width: 10rem !important;
 }
 /*# sourceMappingURL=styles.css.map */
