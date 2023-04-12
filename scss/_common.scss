@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: $tertiary;
+}
+
+*,
+input {
+    font-family: "VT323", monospace;
+}
+
+.button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 5px solid $secondary;
+    background-color: $primary;
+    color: $tertiary;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $secondary;
+        border-color: $primary;
+        outline: 5px solid $secondary;
+    }
+}
