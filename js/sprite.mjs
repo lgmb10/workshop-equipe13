@@ -2,8 +2,7 @@ function spritePositionToImagePosition(spriteItem,itemWidth,spacing) {
     return spriteItem * (spacing + itemWidth);
 }
 
-export function animate(spriteItem,sprite,coo,context) {
-
+export function animate(spriteItem,sprite,coo,context,sizeMultiplier=sizeMultiplier ?? 1) {
     var SpringPosition = spritePositionToImagePosition(spriteItem,sprite.itemWidth,sprite.spacing);
     context.drawImage(
         sprite.image,
@@ -13,10 +12,9 @@ export function animate(spriteItem,sprite,coo,context) {
         sprite.height,
         coo.x,
         coo.y,
-        sprite.itemWidth,
-        sprite.height
+        sprite.itemWidth * sizeMultiplier,
+        sprite.height * sizeMultiplier
     );
-
 }
 
 export function clear(canvas,context) {
