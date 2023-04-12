@@ -50,13 +50,13 @@ function createBox() {
 
             if (isCollide(box)) {
                 life -= 1;
+                clearInterval(moveBox);
+                gameArea.removeChild(box);
                 updateLife();
-                console.log(life);
                 if (life === 0) {
                     gameOver();
                 }
-                clearInterval(moveBox);
-                gameArea.removeChild(box);
+
             }
         }, 10);
     }
@@ -155,6 +155,7 @@ function addHeart() {
 }
 
 function setOnClick() {
+    console.log("setOnClick");
     let boxs = document.querySelectorAll('.box');
     for (let i = 0; i < boxs.length; i++) {
         if (!boxs[i].classList.contains('jump')) {
@@ -226,7 +227,7 @@ function updateLife() {
 }
 
 function updateScore() {
-    const  scoreDiv = document.querySelector(".score");
+    const scoreDiv = document.querySelector(".score");
     scoreDiv.innerHTML = score;
 }
 
