@@ -83,9 +83,12 @@ document.addEventListener('submit', (e) => {
     e.preventDefault();
     let username = document.getElementById('username').value;
     let score = localStorage.getItem('score');
+    let user = localStorage.getItem('user');
+    let userUID = JSON.parse(user).uid;
     let data = {
         username,
-        score
+        score,
+        userUID
     }
     saveScore(data);
 });
@@ -99,6 +102,7 @@ function saveScore(data) {
     setDoc(doc(db, "scores", generateId()), data);
     document.location.href = "index.html";
 }
+
 </script>
 
 </html>
