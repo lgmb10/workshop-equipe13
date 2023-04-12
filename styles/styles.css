@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 body {
   margin: 0;
@@ -21,7 +20,6 @@ input {
   display: inline-block;
   cursor: pointer;
 }
-
 .button:hover {
   background-color: #a45b21;
   border-color: #592b0c;
@@ -32,19 +30,11 @@ input {
   width: 95%;
   margin-inline: auto;
   padding-block: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
   gap: 1rem;
 }
-
 .game-page .game-area {
   position: relative;
   width: 95%;
@@ -53,18 +43,15 @@ input {
   height: 200px;
   border: 5px solid #592b0c;
 }
-
 .game-page .player {
   position: absolute;
   bottom: 0;
   left: 0%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   width: 30px;
   height: 30px;
   background-color: red;
 }
-
 .game-page .box {
   position: absolute;
   bottom: 0;
@@ -75,61 +62,36 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .game-page .jump {
-  -webkit-animation: jump-animation 1s ease-in-out;
-          animation: jump-animation 1s ease-in-out;
+  animation: jump-animation 0.4s ease;
 }
-
-@-webkit-keyframes jump-animation {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-  50% {
-    -webkit-transform: translateY(-100px);
-            transform: translateY(-100px);
-  }
-  75% {
-    -webkit-transform: translateY(-50px);
-            transform: translateY(-50px);
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-}
-
 @keyframes jump-animation {
   0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-50px);
   }
   50% {
-    -webkit-transform: translateY(-100px);
-            transform: translateY(-100px);
+    transform: translateY(-75px);
   }
   75% {
-    -webkit-transform: translateY(-50px);
-            transform: translateY(-50px);
+    transform: translateY(-50px);
   }
   100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
-
 .game-page .bonus {
   position: absolute;
   bottom: 0;
   left: 100%;
   width: 30px;
   height: 30px;
-  background-image: url("../src/img/box2.png");
+  background-image: url("../src/img/star.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .game-page .potion {
   position: absolute;
   bottom: 0;
@@ -140,7 +102,6 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .game-page .getHeart {
   position: absolute;
   bottom: 0;
@@ -151,7 +112,6 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .game-page .heart {
   display: inline-block;
   width: 20px;
@@ -159,7 +119,6 @@ input {
   background-image: url("../src/img/heart.png");
   background-size: contain;
 }
-
 .game-page .heartEmpty {
   display: inline-block;
   width: 20px;
@@ -167,181 +126,22 @@ input {
   background-image: url("../src/img/heartEmpty.png") !important;
   background-size: contain;
 }
-
 .game-page .scoreboard {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   width: 95%;
   height: 50px;
   padding: 1rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 20px;
   margin-inline: auto;
 }
-
 .game-page .score {
   font-weight: bold;
 }
-
 .game-page .hearts {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.score-page {
-  height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-}
-
-.score-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.4;
-  z-index: -1;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url("../src/img/score_background.jpeg");
-}
-
-.score-page section {
-  padding-block: 2rem;
-}
-
-.score-page section .score-table {
-  width: 30rem;
-  margin-inline: auto;
-  background-color: #a45b21;
-  border: 5px solid #592b0c;
-}
-
-.score-page section .score-table h1 {
-  text-align: center;
-  color: #ffffff;
-  font-size: 3rem;
-  padding-block: 1rem;
-  margin: 0;
-  border-bottom: 5px solid #592b0c;
-}
-
-.score-page section .score-list,
-.score-page section .score-title {
-  padding: 0 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  border-bottom: 3px solid #592b0c;
-}
-
-.score-page section .score-list p,
-.score-page section .score-title p {
-  padding-inline: 0.5rem;
-}
-
-.score-page section .score-title {
-  color: #ffffff;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  text-transform: uppercase;
-  font-size: 1.3rem;
-}
-
-.score-page section .score-list {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  list-style: none;
-  list-style-position: inside;
-  height: 50vh;
-  overflow-y: scroll;
-  margin: 0;
-}
-
-.score-page section .score-list li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  border-bottom: 3px solid #592b0c;
-  color: #ffffff;
-}
-
-.score-page section .score-list li:last-child {
-  border: none;
-}
-
-.score-page section .score-list li:nth-child(2) p:last-child::before, .score-page section .score-list li:nth-child(3) p:last-child::before, .score-page section .score-list li:nth-child(4) p:last-child::before {
-  content: "🥇";
-  font-size: 2rem;
-  position: absolute;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  left: 0;
-  top: 50%;
-}
-
-.score-page section .score-list li:nth-child(3) p:last-child::before {
-  content: "🥈";
-}
-
-.score-page section .score-list li:nth-child(4) p:last-child::before {
-  content: "🥉";
-}
-
-.score-page section .score-list li p:first-child {
-  width: 70%;
-}
-
-.score-page section .score-list li p:last-child {
-  position: relative;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  text-align: right;
-}
-
-.score-page section .menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  gap: 1rem;
-  padding-block: 1rem;
-}
-/*# sourceMappingURL=styles.css.map */
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=styles.css.map */
