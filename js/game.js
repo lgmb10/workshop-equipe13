@@ -72,7 +72,6 @@ function createBox() {
 }
 
 function addBonusBox() {
-    console.log("addBonusBox");
     // Créer une div pour la boîte bonus
     let bonusBox = document.createElement("div");
     bonusBox.classList.add("box", "bonus");
@@ -105,7 +104,6 @@ function addBonusBox() {
 }
 
 function addPotionBox() {
-    console.log("addPotionBox");
     // Créer une div pour la boîte bonus
     let potionBox = document.createElement("div");
     potionBox.classList.add("box", "potion");
@@ -137,7 +135,6 @@ function addPotionBox() {
 }
 
 function addHeart() {
-    console.log("addHeart");
     // Créer une div pour la boîte bonus
     let heart = document.createElement("div");
     heart.classList.add("box", "getHeart");
