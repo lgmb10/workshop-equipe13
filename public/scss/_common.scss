@@ -8,6 +8,7 @@ body {
 *,
 input {
     font-family: "VT323", monospace;
+    box-sizing: border-box;
 }
 
 .button {
@@ -18,6 +19,8 @@ input {
     color: $white;
     display: inline-block;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
 
     &.pause {
         cursor: initial;
@@ -35,5 +38,42 @@ input {
         background-color: $secondary;
         border-color: $primary;
         outline: 5px solid $secondary;
+    }
+
+    &.inside-form {
+        background-color: $secondary;
+        border-color: $primary;
+
+        &:hover {
+            background-color: $primary;
+            border-color: $secondary;
+            outline-color: $tertiary;
+        }
+    }
+}
+
+.main-form {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > .button {
+        margin-top: 2rem;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.4;
+        z-index: -1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url("../src/img/score_background.jpeg");
     }
 }

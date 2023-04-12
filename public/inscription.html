@@ -1,63 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-    <title>Page de connexion</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: "assets/background_accueil.jpg";
-        }
-
-        form {
-            margin: 50px auto;
-            width: 500px;
-            padding: 20px;
-            background-image: "assets/background_accueil.jpg";
-
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            display: block;
-            margin: 10px 0;
-            padding: 5px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        input[type="submit"] {
-            background-color: black;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            padding: 10px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Page de connexion</title>
 </head>
 
 <body>
-    <form id="login-form" action="" method="post">
-        <h2>Inscription</h2>
-        <label for="email">Adresse Mail:</label>
-        <input type="text" id="email" name="email" placeholder="Entrez votre email" required>
+    <main class="main-form">
+        <section class="main-title-container">
+            <p>Bienvenu dans</p>
+            <h1 class="main-title">SideScroller</h1>
+            <h4>THE GAME OF PASS AND FAIL, DO YOUR BEST TO SUCCEED...</h4>
 
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
-
-        <input type="submit" value="S'Inscrire">
-    </form>
+        </section>
+        <form id="login-form" action="" method="post">
+            <h2>Inscription</h2>
+            <div class="input-container">
+                <label for="email">Adresse Mail:</label>
+            <input type="text" id="email" name="email" placeholder="Entrez votre email" required>
+            </div>
+    
+            <div class="input-container">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+            </div>
+    
+            <input type="submit" value="S'Inscrire" class="button inside-form">
+        </form>
+        <a href="accueil.html" class="button">J'ai déjà un compte</a>
+    </main>
 
 </body>
 <script type="module">

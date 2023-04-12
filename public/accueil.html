@@ -1,84 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="./styles/acceuil.css" />
+	<link rel="stylesheet" href="styles/styles.css">
 	<title>Page d'accueil</title>
 </head>
 
 <body>
-
-	<!-- çà commence ici -->
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			background-image: "assets/background_accueil.jpg";
-		}
-
-		form {
-			margin: 50px auto;
-			width: 500px;
-			padding: 20px;
-			background-image: "assets/background_accueil.jpg";
-
-		}
-
-		input[type="text"],
-		input[type="password"] {
-			opacity: 0.4;
-			display: block;
-			margin: 10px 0;
-			padding: 5px;
-			width: 100%;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-		}
-
-		input[type="submit"] {
-			opacity: 0.6;
-			background-color: blue;
-			color: white;
-			border: none;
-			border-radius: 6px;
-			padding: 10px;
-			cursor: pointer;
-			width: 100%;
-			margin-top: 10px;
-		}
-
-		input[type="submit"]:hover {
-			background-color: #45a049;
-		}
-	</style>
-
-
-	<div class="container">
-		<nav>
-			<img src="assets/wanen_white.jpg" alt="" class="logo" />
-		</nav>
-
-		<section class="site-container">
-			<p>Bienvenu à</p>
-			<h1>SideScroller</h1>
-			<h4>THE GAME OF PASS AND FAIL, DO YOUR BEST TO SUCCEED...</h4>
-
-		</section>
-
-		<form id="login-form" action="" method="post">
-			<h2 style="color: #ccc;">Connexion</h2>
-			<label for="email" style="color: #ccc;">Adresse Mail:</label>
-			<input type="text" id="email" name="email" placeholder="Entrez votre email" required>
-
-			<label for="password" style="color: #ccc;">Mot de passe:</label>
-			<input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
-
-			<input type="submit" value="Se connecter">
-		</form>
-
-	</div>
+		<main class="main-form">
+			<section class="main-title-container">
+				<p>Bienvenu dans</p>
+				<h1 class="main-title">SideScroller</h1>
+				<h4>THE GAME OF PASS AND FAIL, DO YOUR BEST TO SUCCEED...</h4>
+	
+			</section>
+	
+			<form id="login-form" action="" method="post">
+				<h2>Connexion</h2>
+				<div class="input-container">
+					<label for="email" >Adresse Mail:</label>
+				<input type="text" id="email" name="email" placeholder="Entrez votre email" required>
+				</div>
+	
+				<div class="input-container">
+					<label for="password" >Mot de passe:</label>
+				<input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+				</div>
+	
+				<input type="submit" value="Se connecter" class="button inside-form">
+			</form>
+			<a href="inscription.html" class="button">Je n'ai pas de compte</a>
+		</main>
 </body>
 
 </html>
