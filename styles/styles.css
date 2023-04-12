@@ -22,6 +22,18 @@ input {
   cursor: pointer;
 }
 
+.button.pause {
+  cursor: initial;
+  display: none;
+}
+
+.button.active {
+  display: block;
+  background-color: #a45b21;
+  border-color: #592b0c;
+  outline: 5px solid #a45b21;
+}
+
 .button:hover {
   background-color: #a45b21;
   border-color: #592b0c;
@@ -43,6 +55,22 @@ input {
       -ms-flex-pack: end;
           justify-content: flex-end;
   gap: 1rem;
+}
+
+.game-page .ingame-message {
+  width: 100%;
+  text-align: center;
+}
+
+.game-page .ingame-message p {
+  opacity: 0;
+  font-size: 1.5rem;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.game-page .ingame-message p.show {
+  opacity: 1;
 }
 
 .game-page .game-area {
@@ -197,6 +225,7 @@ input {
 
 .game-page .score {
   font-weight: bold;
+  font-size: 2rem;
 }
 
 .game-page .hearts {

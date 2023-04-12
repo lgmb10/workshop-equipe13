@@ -19,6 +19,18 @@ input {
     display: inline-block;
     cursor: pointer;
 
+    &.pause {
+        cursor: initial;
+        display: none;
+    }
+
+    &.active {
+        display: block;
+        background-color: $secondary;
+        border-color: $primary;
+        outline: 5px solid $secondary;
+    }
+
     &:hover {
         background-color: $secondary;
         border-color: $primary;

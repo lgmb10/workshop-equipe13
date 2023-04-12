@@ -1,11 +1,15 @@
 const gameArea = document.querySelector('.game-area');
 const player = document.querySelector('.player');
+const pauseInfo = document.querySelector('#pause');
+let ingameMessage = document.querySelector(".ingame-message");
 let score = 0;
 let isGameOver = false;
 const startTime = new Date();
 let speed = 5;
 let life = 3;
 let previousDelay = startTime;
+let isGameStarted = false;
+let isGamePaused = false;
 
 function getSpeed() {
     let delay = Math.ceil((new Date().getTime() - startTime.getTime()) / 1000);
@@ -21,45 +25,50 @@ function getSpeed() {
 
 
 function createBox() {
-    if (Math.random() < 0.05) {
-        addBonusBox();
-    } else if (Math.random() < 0.10 && Math.random() > 0.05) {
-        addPotionBox();
-    } else if (Math.random() < 0.15 && Math.random() > 0.10 && life < 3) {
-        addHeart();
-    } else {
-        const box = document.createElement('div');
-        box.classList.add('box');
-        gameArea.appendChild(box);
+    if (!isGamePaused) {
+        if (Math.random() < 0.05) {
+            addBonusBox();
+        } else if (Math.random() < 0.10 && Math.random() > 0.05) {
+            addPotionBox();
+        } else if (Math.random() < 0.15 && Math.random() > 0.10 && life < 3) {
+            addHeart();
+        } else {
+            const box = document.createElement('div');
+            box.classList.add('box');
+            gameArea.appendChild(box);
 
-        let boxLeft = gameArea.offsetWidth;
-        const moveBox = setInterval(() => {
-            if (isGameOver) {
-                clearInterval(moveBox);
-                return;
-            }
+            let boxLeft = gameArea.offsetWidth;
+            const moveBox = setInterval(() => {
+                if (isGamePaused) return;
 
-            boxLeft -= getSpeed();
-            box.style.left = `${boxLeft}px`;
-
-            if (boxLeft < -10) {
-                clearInterval(moveBox);
-                gameArea.removeChild(box);
-                score++;
-            }
-
-            if (isCollide(box)) {
-                life -= 1;
-                clearInterval(moveBox);
-                gameArea.removeChild(box);
-                updateLife();
-                if (life === 0) {
-                    gameOver();
+                if (isGameOver) {
+                    clearInterval(moveBox);
+                    return;
                 }
 
-            }
-        }, 10);
+                boxLeft -= getSpeed();
+                box.style.left = `${boxLeft}px`;
+
+                if (boxLeft < -10) {
+                    clearInterval(moveBox);
+                    gameArea.removeChild(box);
+                    score++;
+                }
+
+                if (isCollide(box)) {
+                    life -= 1;
+                    clearInterval(moveBox);
+                    gameArea.removeChild(box);
+                    updateLife();
+                    if (life === 0) {
+                        gameOver();
+                    }
+
+                }
+            }, 10);
+        }
     }
+
 }
 
 function addBonusBox() {
@@ -74,6 +83,7 @@ function addBonusBox() {
 
     // Déplacer la boîte bonus vers la gauche jusqu'à sortir de la zone de jeu
     let bonusBoxInterval = setInterval(function () {
+        if (isGamePaused) return;
         x -= getSpeed();
         bonusBox.style.left = `${x}px`;
 
@@ -83,7 +93,7 @@ function addBonusBox() {
             bonusBox.remove();
             score += 5;
             // Faire quelque chose lorsque le joueur touche la boîte bonus
-            console.log("Vous avez obtenu un bonus !");
+            createShortLivedMessage("Vous avez obtenu 5 points bonus !");
         }
 
         // Supprimer la boîte bonus si elle sort de la zone de jeu
@@ -106,6 +116,7 @@ function addPotionBox() {
 
     // Déplacer la boîte bonus vers la gauche jusqu'à sortir de la zone de jeu
     let potionBoxInterval = setInterval(function () {
+        if (isGamePaused) return;
         x -= getSpeed();
         potionBox.style.left = `${x}px`;
 
@@ -120,7 +131,7 @@ function addPotionBox() {
                     speed += 1;
                 }, 5000);
             }
-            console.log("Vous avez obtenu un bonus !");
+            createShortLivedMessage("La vitesse est ralenti pendant un court instant !");
         }
     }, 10);
 }
@@ -137,6 +148,7 @@ function addHeart() {
 
     // Déplacer la boîte bonus vers la gauche jusqu'à sortir de la zone de jeu
     let heartInterval = setInterval(function () {
+        if (isGamePaused) return;
         x -= getSpeed();
         heart.style.left = `${x}px`;
 
@@ -148,14 +160,13 @@ function addHeart() {
             if (life < 3) {
                 life += 1;
                 updateLife();
-                console.log("Vous avez obtenu un bonus !");
+                createShortLivedMessage("Vous avez obtenu une vie supplémentaire !");
             }
         }
     }, 10);
 }
 
-function setOnClick() {
-    console.log("setOnClick");
+function jump() {
     let boxs = document.querySelectorAll('.box');
     for (let i = 0; i < boxs.length; i++) {
         if (!boxs[i].classList.contains('jump')) {
@@ -170,13 +181,13 @@ function setOnClick() {
 
 //si le user clique alors la premiere box saute
 document.addEventListener('keydown', (e) => {
-    if (e.code == "Space") setOnClick(e);
+    if (e.code == "Space") jump(e);
 
 });
 
 //si le user clique alors la premiere box saute
 document.addEventListener('click', (e) => {
-    setOnClick(e);
+    jump(e);
 
 });
 
@@ -207,7 +218,7 @@ function generateRandomBox() {
 }
 
 function generateRandomTime() {
-    return (Math.random() * 100 + 500);
+    if (!isGamePaused) return (Math.random() * 100 + 500);
 }
 
 function updateLife() {
@@ -232,4 +243,40 @@ function updateScore() {
 }
 
 
-generateRandomBox();
+// Démmarer le jeu en appuyant sur entrée
+document.addEventListener('keydown', (e) => {
+    if (e.code == "Enter" && !isGameStarted) {
+        let startMessage = document.querySelector(".start-message")
+        generateRandomBox();
+        startMessage.classList.remove('show');
+        setTimeout(() => startMessage.remove(), 1000);
+        isGameStarted = true;
+
+    };
+});
+
+
+// Créer des messages éphemaires
+function createShortLivedMessage(text) {
+    let p = document.createElement('p');
+    p.innerHTML = text;
+    p.classList.add("show");
+    ingameMessage.appendChild(p);
+    setTimeout(() => p.classList.remove('show'), 2000);
+    setTimeout(() => p.remove(), 2600);
+}
+
+
+document.addEventListener('keydown', (e) => {
+    if (e.code == "KeyP" && isGameStarted) {
+        if (isGamePaused) {
+            pauseInfo.classList.remove("active");
+            isGamePaused = false;
+        } else {
+            pauseInfo.classList.add("active");
+            isGamePaused = true;
+        }
+    };
+});
+
+
