@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page de connexion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: "assets/background_accueil.jpg";
+        }
+
+        form {
+            margin: 50px auto;
+            width: 500px;
+            padding: 20px;
+            background-image: "assets/background_accueil.jpg";
+
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            display: block;
+            margin: 10px 0;
+            padding: 5px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="login-form" action="" method="post">
+        <h2>Inscription</h2>
+        <label for="email">Adresse Mail:</label>
+        <input type="text" id="email" name="email" placeholder="Entrez votre email" required>
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+
+        <input type="submit" value="S'Inscrire">
+    </form>
+
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-analytics.js";
+	import { getAuth, createUserWithEmailAndPassword  } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
+    import { getFirestore, setDoc, doc } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js';
+	// ne pas effacer ou changer : configurations Firebase
+	const firebaseConfig = {
+		apiKey: "AIzaSyAgA7Z2WyTM1BgVEQd3XveiSaONKZrUN8k",
+		authDomain: "sidescroller-89622.firebaseapp.com",
+		projectId: "sidescroller-89622",
+		storageBucket: "sidescroller-89622.appspot.com",
+		messagingSenderId: "650779201021",
+		appId: "1:650779201021:web:c3e7d43d4c357030b05d94",
+		measurementId: "G-FMDRRS3J3R"
+	  };	
+
+	// Initialize Firebase
+	const firebase = initializeApp(firebaseConfig);
+
+
+    function inscription(email, password) {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log("user: " + user.uid);
+            // save user in database
+            const db = getFirestore();
+            const userRef = doc(db, "users", user.uid);
+            setDoc(userRef, {
+                email: email
+            })
+            .then(() => {
+                console.log("User successfully added to Firestore!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+        })
+        .catch((error) => {
+            console.error("Error creating user: ", error);
+        });
+        //redirect to game
+        window.location.href = "index.html";
+    }
+
+		function verifyEmail(email){
+			if(email.length>0)
+				return true;
+			return false;
+		}
+
+		function verifyPassword(password){
+			if(password.length>0)
+			return true;
+		return false;
+		}
+
+		document.getElementById("login-form").addEventListener("submit", function(e){
+			e.preventDefault();
+			const email = document.getElementById("email").value;
+			const password = document.getElementById("password").value;
+			if(verifyEmail(email) && verifyPassword(password)){
+				console.log("email: "+email+" password: "+password);
+				inscription(email, password);
+			}
+		})
+
+
+</script>
+
+</html>
