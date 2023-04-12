@@ -74,9 +74,9 @@
                     border: none;
                 }
 
+                &:nth-child(1),
                 &:nth-child(2),
-                &:nth-child(3),
-                &:nth-child(4) {
+                &:nth-child(3) {
                     p:last-child {
                         &::before {
                             content: "🥇";
@@ -89,11 +89,11 @@
                     }
                 }
 
-                &:nth-child(3) p:last-child::before {
+                &:nth-child(2) p:last-child::before {
                     content: "🥈";
                 }
 
-                &:nth-child(4) p:last-child::before {
+                &:nth-child(3) p:last-child::before {
                     content: "🥉";
                 }
 

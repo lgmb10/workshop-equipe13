@@ -1,0 +1,74 @@
+/* Style de base pour la page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  
+  /* Style pour l'en-tÃªte */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Style pour le titre */
+  h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+  
+  /* Style pour la navigation */
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav li {
+    margin-right: 20px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  /* Style pour le contenu principal */
+  main {
+    padding: 50px;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 36px;
+  }
+  
+  p {
+    font-size: 24px;
+  }
+  
+  .button {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  /* Style pour le pied de page */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+  }

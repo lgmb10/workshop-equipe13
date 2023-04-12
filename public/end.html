@@ -61,7 +61,7 @@
 </body>
 <script src="./js/end.js"></script>
 <script type="module">
-    import { initializeApp} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+import { initializeApp} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getFirestore, setDoc, doc} from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js';
 
 
@@ -83,8 +83,8 @@ document.addEventListener('submit', (e) => {
     e.preventDefault();
     let username = document.getElementById('username').value;
     let score = localStorage.getItem('score');
-    let user = localStorage.getItem('user');
-    let userUID = JSON.parse(user).uid;
+    let user = JSON.parse(localStorage.getItem('user'))
+    let userUID = user.uid;
     let data = {
         username,
         score,
@@ -98,11 +98,16 @@ function generateId() {
 }
 
 function saveScore(data) {
+    console.log(data);
     const db = getFirestore();
-    setDoc(doc(db, "scores", generateId()), data);
-    document.location.href = "index.html";
-}
-
+    setDoc(doc(db, "scores", generateId()), data).then(() => {
+        console.log("Document successfully written!");
+        document.location.href = "index.html";
+    })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+    }
 </script>
 
 </html>
