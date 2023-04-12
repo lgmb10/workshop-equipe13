@@ -1,63 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <title>Page de connexion</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
     <title>End</title>
-
-
 </head>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-image: "assets/background_accueil.jpg";
-    }
-
-    form {
-        margin: 50px auto;
-        width: 500px;
-        padding: 20px;
-        background-image: "assets/background_accueil.jpg";
-
-    }
-
-    input[type="text"],
-    input[type="password"] {
-        display: block;
-        margin: 10px 0;
-        padding: 5px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
-    input[type="submit"] {
-        background-color: black;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        padding: 10px;
-        cursor: pointer;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #45a049;
-    }
-</style>
 
 <body>
-    <form id="login-form" action="" method="post">
-        <h2>Vous avez fini le jeu :</h2>
-        <label for="email">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
-        <span>Votre score est de : </span><span id="score"></span>
-        <input type="submit" value="Enregistrer le score" />
-    </form>
+    <main class="main-form">
+        <section class="main-title-container">&nbsp;</section>
+        <form id="login-form" action="" method="post">
+            <h2>Vous avez fini le jeu :</h2>
+            <div class="input-container">
+                <label for="email">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+            </div>
+            <span>Votre score est de : </span><span id="score"></span>
+            <input type="submit" value="Enregistrer le score" class="button inside-form" />
+        </form>
+    </main>
 </body>
 <script src="./js/end.js"></script>
 <script type="module">

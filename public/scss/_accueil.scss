@@ -1,0 +1,39 @@
+.main-title-container {
+    width: fit-content;
+    margin-inline: auto;
+    color: $white;
+    text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2rem;
+
+    p {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .main-title {
+        color: $white;
+        line-height: 1;
+        font-size: 8rem;
+        text-shadow: none;
+        text-align: center;
+        margin: 0;
+        color: transparent;
+        -webkit-text-stroke: 1px $white;
+        background: url("../assets/pattern.png");
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-position: 0 0;
+        animation: animate 20s linear 2s infinite alternate;
+    }
+
+    @keyframes animate {
+        100% {
+            background-position: -500px 0;
+        }
+    }
+}
