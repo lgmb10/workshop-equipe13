@@ -15,9 +15,21 @@ input {
     padding: 0.5rem 1rem;
     border: 5px solid $secondary;
     background-color: $primary;
-    color: $tertiary;
+    color: $white;
     display: inline-block;
     cursor: pointer;
+
+    &.pause {
+        cursor: initial;
+        display: none;
+    }
+
+    &.active {
+        display: block;
+        background-color: $secondary;
+        border-color: $primary;
+        outline: 5px solid $secondary;
+    }
 
     &:hover {
         background-color: $secondary;
