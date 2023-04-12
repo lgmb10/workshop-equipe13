@@ -100,10 +100,14 @@ function generateId() {
 function saveScore(data) {
     console.log(data);
     const db = getFirestore();
-    setDoc(doc(db, "scores", generateId()), data);
-    document.location.href = "index.html";
-}
-
+    setDoc(doc(db, "scores", generateId()), data).then(() => {
+        console.log("Document successfully written!");
+        document.location.href = "index.html";
+    })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+    }
 </script>
 
 </html>
