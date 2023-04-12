@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #bfa38e;
+}
+
+*,
+input {
+  font-family: "VT323", monospace;
+}
+
+.button {
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 5px solid #a45b21;
+  background-color: #592b0c;
+  color: #bfa38e;
+  display: inline-block;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #a45b21;
+  border-color: #592b0c;
+  outline: 5px solid #a45b21;
+}
+
+.game-page .menu {
+  width: 95%;
+  margin-inline: auto;
+  padding-block: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.game-page .game-area {
+  position: relative;
+  width: 95%;
+  margin-inline: auto;
+  overflow: hidden;
+  height: 200px;
+  border: 5px solid #592b0c;
+}
+.game-page .player {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: red;
+}
+.game-page .box {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 30px;
+  height: 30px;
+  background-image: url("../src/img/box1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.game-page .jump {
+  animation: jump-animation 0.4s ease;
+}
+@keyframes jump-animation {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-50px);
+  }
+  50% {
+    transform: translateY(-75px);
+  }
+  75% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.game-page .bonus {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 30px;
+  height: 30px;
+  background-image: url("../src/img/star.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.game-page .potion {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 30px;
+  height: 30px;
+  background-image: url("../src/img/potionVitesse.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.game-page .getHeart {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 30px;
+  height: 30px;
+  background-image: url("../src/img/heart.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.game-page .heart {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../src/img/heart.png");
+  background-size: contain;
+}
+.game-page .heartEmpty {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../src/img/heartEmpty.png") !important;
+  background-size: contain;
+}
+.game-page .scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  height: 50px;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-size: 20px;
+  margin-inline: auto;
+}
+.game-page .score {
+  font-weight: bold;
+}
+.game-page .hearts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=styles.css.map */
