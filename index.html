@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Page de choix du jeu</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
 <body>
+    <header>
+        <h1>SIDESCROLLER</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Recharger</a></li>
+                <li><a href="score.html">Scores</a></li>
+                <li><a href="accueil.html">Deconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Bienvenue dans le jeu</h2>
+        <p>Eclatez-vous</p>
+        <a href="game.html" class="button">Jouer</a>
+    </main>
+
 
 </body>
-<script>
-    // getUser
-    let user = localStorage.getItem('user');
-    console.log(user);
-</script>
-<script type="module" src="js/index.js"></script>
 
 </html>
