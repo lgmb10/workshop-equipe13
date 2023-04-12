@@ -146,4 +146,17 @@
         justify-content: center;
         align-items: center;
     }
+
+    .menu2 {
+        width: 95%;
+        padding-block: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    
+    .time {
+        margin-left: 50px;
+    }
 }
