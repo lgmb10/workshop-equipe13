@@ -67,3 +67,4 @@ function game() {
 setInterval(() => {
     game();
 }, 20);
+
