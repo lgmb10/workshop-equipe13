@@ -10,6 +10,9 @@ import { createItem, drawItem, isColision } from "./item.mjs";
 const gameArea = document.querySelector('.game-area');
 const hearts = document.querySelectorAll(".heart");
 const scoreDiv = document.querySelector(".score");
+const pauseInfo = document.querySelector('#pause');
+let ingameMessage = document.querySelector(".ingame-message");
+
 
 let canvas = document.querySelector('canvas');
 let context = canvas.getContext('2d');
@@ -22,7 +25,7 @@ let posRun = 1;
 let posHurt = 1;
 let posDeath = 1;
 let playerSizeMultiplier = 2.5
-let gameSpeed = 4;
+let gameSpeed = 4.5;
 let time = 0.0;
 let gameOnGoing = false;
 let isAlive = true;
@@ -38,22 +41,22 @@ function handlePlayer() {
     if (!gameOnGoing) {
         if (isAlive) {
             posIdle >= idle.length && (posIdle = 0);
-            animate(posIdle,idle,{x:50,y:100},context,playerSizeMultiplier);
+            animate(posIdle, idle, { x: 50, y: 100 }, context, playerSizeMultiplier);
         } else {
             posDeath >= death.length && (posDeath = death.length - 1);
-            animate(posDeath,death,{x:50,y:100},context,playerSizeMultiplier);
+            animate(posDeath, death, { x: 50, y: 100 }, context, playerSizeMultiplier);
         }
     } else {
         if (isHurt) {
-            posHurt >= hurt.length && (posHurt = 0,isHurt = false);
-            animate(posHurt,hurt,{x:50,y:100},context,playerSizeMultiplier);
+            posHurt >= hurt.length && (posHurt = 0, isHurt = false);
+            animate(posHurt, hurt, { x: 50, y: 100 }, context, playerSizeMultiplier);
         } else {
             if (gameSpeed >= 6) {
                 posRun >= run.length && (posRun = 0);
-                animate(posRun,run,{x:50,y:100},context,playerSizeMultiplier);
+                animate(posRun, run, { x: 50, y: 100 }, context, playerSizeMultiplier);
             } else {
                 posWalk >= walk.length && (posWalk = 0);
-                animate(posWalk,walk,{x:50,y:100},context,playerSizeMultiplier);
+                animate(posWalk, walk, { x: 50, y: 100 }, context, playerSizeMultiplier);
             }
         }
     }
@@ -80,46 +83,52 @@ function handleItems() {
             gameOnGoing && (item.x -= gameSpeed);
             if (item.jumping) {
                 if (item.jumpWay == 'up' && item.y > 10) {      //monte
-                    item.y -= gameSpeed*1.5;
+                    item.y -= gameSpeed * 1.5;
                 } else if (item.jumpWay == 'up' && item.y < 10) {   //commence décente
-                    item.y += gameSpeed*1.2;
+                    item.y += gameSpeed * 1.2;
                     item.jumpWay = 'down';
                 } else if (item.jumpWay == 'down') {     //décent
                     if (item.y < 135) {
-                        item.y += gameSpeed*1.2;
+                        item.y += gameSpeed * 1.2;
                     } else {                        //attérit
                         item.y = 135;
                         item.jumpWay = 'up';
                         item.jumping = false;
                     }
                 }
-            } 
-            
-            drawItem(item,{x:item.x,y:item.y},context);
+            }
 
-            if (!isHurt && isColision(item,playerPeace)) {
+            drawItem(item, { x: item.x, y: item.y }, context);
+
+            if (!isHurt && isColision(item, playerPeace)) {
                 if (item.type == 'box') {
                     if (health > 1) {
                         isHurt = true;
                     } else {
                         isAlive = false;
                         gameOnGoing = false;
+                        localStorage.setItem('score', score);
+                        window.location = 'end.html'
                     }
                     health--;
                 } else if (item.type == 'heart' && health < 3) {
-                    health++
-                } 
-                // else if (item.type == 'reduceSpeed') {
-                //     if (!slowed) {
-                //         slowedValue = gameSpeed * 0.3;
-                //         gameSpeed = gameSpeed * 0,7;
-                //         slowed = true;
-                //     }
-                //     slowStartTime = time;
-                // } 
+                    health++;
+                    createShortLivedMessage("Vous avez obtenu une vie supplémentaire !");
+                }
+                else if (item.type == 'reduceSpeed') {
+                    if (gameSpeed > 4) {
+                        createShortLivedMessage("La vitesse est ralenti pendant un court instant !");
+                        let oldSpeed = gameSpeed;
+                        gameSpeed = gameSpeed * 0.7;
+                        setTimeout(() => {
+                            gameSpeed = oldSpeed;
+                        }, 5000);
+                    }
+                }
                 else if (item.type == 'coin') {
                     score += 5;
                     scoreDiv.innerHTML = score;
+                    createShortLivedMessage("Vous avez obtenu 5 points bonus !");
                 }
                 updateHealth();
                 itemsList.shift();
@@ -143,6 +152,10 @@ document.addEventListener('keydown', (e) => {
             posIdle = 1;
             gameOnGoing = true;
             playerPeace = "walk";
+
+            let startMessage = document.querySelector(".start-message")
+            startMessage.classList.remove('show');
+            setTimeout(() => startMessage.remove(), 1000);
         }
     }
 });
@@ -178,14 +191,14 @@ function start() {
             timeContainer.innerHTML = `temps : ${time.toFixed(1)} s`;
         }
     }, 100)
-    let interval = Math.round(Math.random()*2000 + 200);
+    let interval = Math.round(Math.random() * 2000 + 200);
     function itemsInterval() {
         clearInterval(items)
         if (gameOnGoing) {
-            let newItem = createItem(gameArea.offsetWidth,health);
+            let newItem = createItem(gameArea.offsetWidth, health);
             itemsList.push(newItem);
         }
-        interval = Math.round(Math.random()*2000 + 200);
+        interval = Math.round(Math.random() * 2000 + 200);
         items = setInterval(() => {
             itemsInterval();
         }, interval);
@@ -195,9 +208,9 @@ function start() {
     }, interval);
     setInterval(() => {
         gameSpeed += 0.5;
-    }, 15000)
+    }, 8000)
     function getRandBackground() {
-        return Math.floor((Math.random()*4) + 1)
+        return Math.floor((Math.random() * 4) + 1)
     }
     setInterval(() => {
         if (gameOnGoing) {
@@ -209,19 +222,40 @@ function start() {
             BACKGROUND.id = newId;
         }
     }, 30000)
-    // setInterval(() => {
-    //     if (slowed && slowStartTime + 5 <= time) {
-    //         slowed = false;
-    //         gameSpeed = gameSpeed + slowedValue;
-    //     }
-    // }, 1000)
+    setInterval(() => {
+        if (slowed && slowStartTime + 5 <= time) {
+            slowed = false;
+            gameSpeed = gameSpeed + slowedValue;
+        }
+    }, 1000)
 }
 
 function game() {
-    clear(canvas,context);
-    handleBackGround(BACKGROUND,gameOnGoing ? gameSpeed : 0,context);
+    clear(canvas, context);
+    handleBackGround(BACKGROUND, gameOnGoing ? gameSpeed : 0, context);
     handleItems();
     handlePlayer();
 }
+
+function createShortLivedMessage(text) {
+    let p = document.createElement('p');
+    p.innerHTML = text;
+    p.classList.add("show");
+    ingameMessage.appendChild(p);
+    setTimeout(() => p.classList.remove('show'), 2000);
+    setTimeout(() => p.remove(), 2600);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.code == "KeyP" && time > 0 && isAlive) {
+        if (gameOnGoing) {
+            pauseInfo.classList.add("active");
+            gameOnGoing = false;
+        } else {
+            pauseInfo.classList.remove("active");
+            gameOnGoing = true;
+        }
+    };
+});
 
 start();

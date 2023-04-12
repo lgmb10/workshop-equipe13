@@ -7,6 +7,11 @@
         flex-direction: row;
         justify-content: flex-end;
         gap: 1rem;
+
+        p {
+            flex-grow: 1;
+            padding-left: 1rem;
+        }
     }
 
     .ingame-message {
@@ -145,18 +150,5 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .menu2 {
-        width: 95%;
-        padding-block: 1rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-    
-    .time {
-        margin-left: 50px;
     }
 }
