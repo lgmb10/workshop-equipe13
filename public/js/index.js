@@ -43,9 +43,6 @@ let isHurt = false;
 let itemsList = [];
 let health = 3;
 let playerPeace = "idle";
-let slowed = false;
-let slowedValue = 0;
-let slowStartTime = 0;
 
 function handlePlayer() {
     if (!gameOnGoing) {
@@ -242,18 +239,12 @@ function start() {
             }
             let newBG = new Image();
             newBG.src = `../images/background/City${newId}.png`;
-            newBG.onload(function() {
+            newBG.onload(function () {
                 BACKGROUND.image = newBG
                 BACKGROUND.id = newId;
             })
         }
     }, 30000)
-    setInterval(() => {
-        if (slowed && slowStartTime + 5 <= time) {
-            slowed = false;
-            gameSpeed = gameSpeed + slowedValue;
-        }
-    }, 1000)
 }
 
 function game() {
