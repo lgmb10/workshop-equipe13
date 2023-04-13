@@ -88,6 +88,11 @@ input {
   background-image: url("../src/img/score_background.jpeg");
 }
 
+.game-page {
+  max-width: 1774px;
+  margin-inline: auto;
+}
+
 .game-page .menu {
   width: 95%;
   margin-inline: auto;
