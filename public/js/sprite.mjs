@@ -18,10 +18,11 @@ export function animate(spriteItem,sprite,coo,context,sizeMultiplier=sizeMultipl
 }
 
 export function handleBackGround(BG,gameSpeed,context) {
-    if (BG.x1 <= -BG.width + gameSpeed) BG.x1 = BG.width;
-    else BG.x1 -= gameSpeed;
-    if (BG.x2 <= -BG.width + gameSpeed) BG.x2 = BG.width;
-    else BG.x2 -= gameSpeed;
+    // console.log('test',BG.x1,BG.x2, gameSpeed)
+    if (BG.x1 <= -BG.width) BG.x1 = BG.width;
+    else if (BG.x2 <= -BG.width) BG.x2 = BG.width;
+    else if (BG.x1 <= 0) BG.x1 -= gameSpeed, BG.x2 = BG.x1 + BG.width
+    else BG.x2 -= gameSpeed, BG.x1 = BG.x2 + BG.width
     context.drawImage(BG.image, BG.x1, BG.y, BG.width, BG.height);
     context.drawImage(BG.image, BG.x2, BG.y, BG.width, BG.height)
 }
