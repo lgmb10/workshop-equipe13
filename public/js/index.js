@@ -13,6 +13,16 @@ const scoreDiv = document.querySelector(".score");
 const pauseInfo = document.querySelector('#pause');
 let ingameMessage = document.querySelector(".ingame-message");
 
+let hitSound = new Audio('../src/audio/hit.mp3');
+let coinSound = new Audio('../src/audio/coin.mp3');
+coinSound.volume = 0.15;
+let lifeUpSound = new Audio('../src/audio/life_up.mp3');
+let potionSound = new Audio('../src/audio/potion.mp3');
+let deathSound = new Audio('../src/audio/death.mp3');
+let musicSound = new Audio('../src/audio/music.mp3');
+musicSound.volume = 0.3;
+
+
 
 let canvas = document.querySelector('canvas');
 let context = canvas.getContext('2d');
@@ -102,21 +112,31 @@ function handleItems() {
 
             if (!isHurt && isColision(item, playerPeace)) {
                 if (item.type == 'box') {
+
                     if (health > 1) {
+                        hitSound.play();
                         isHurt = true;
                     } else {
                         isAlive = false;
+                        deathSound.play();
                         gameOnGoing = false;
                         localStorage.setItem('score', score);
-                        window.location = 'end.html'
+                        createShortLivedMessage("Tu es décédé");
+                        musicSound.pause();
+                        setTimeout(() => {
+                            window.location = 'end.html'
+                        }, 2000);
+
                     }
                     health--;
                 } else if (item.type == 'heart' && health < 3) {
+                    lifeUpSound.play();
                     health++;
                     createShortLivedMessage("Vous avez obtenu une vie supplémentaire !");
                 }
                 else if (item.type == 'reduceSpeed') {
                     if (gameSpeed > 4) {
+                        potionSound.play();
                         createShortLivedMessage("La vitesse est ralenti pendant un court instant !");
                         let oldSpeed = gameSpeed;
                         gameSpeed = gameSpeed * 0.7;
@@ -126,6 +146,7 @@ function handleItems() {
                     }
                 }
                 else if (item.type == 'coin') {
+                    coinSound.play();
                     score += 5;
                     scoreDiv.innerHTML = score;
                     createShortLivedMessage("Vous avez obtenu 5 points bonus !");
@@ -152,6 +173,7 @@ document.addEventListener('keydown', (e) => {
             posIdle = 1;
             gameOnGoing = true;
             playerPeace = "walk";
+            musicSound.play();
 
             let startMessage = document.querySelector(".start-message")
             startMessage.classList.remove('show');
@@ -251,9 +273,11 @@ document.addEventListener('keydown', (e) => {
         if (gameOnGoing) {
             pauseInfo.classList.add("active");
             gameOnGoing = false;
+            musicSound.pause();
         } else {
             pauseInfo.classList.remove("active");
             gameOnGoing = true;
+            musicSound.play();
         }
     };
 });
