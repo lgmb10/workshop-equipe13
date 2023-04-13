@@ -229,7 +229,7 @@ function start() {
         itemsInterval();
     }, interval);
     setInterval(() => {
-        gameSpeed += 0.5;
+        if (gameOnGoing) gameSpeed += 0.5;
     }, 8000)
     function getRandBackground() {
         return Math.floor((Math.random() * 4) + 1)
