@@ -240,8 +240,12 @@ function start() {
             while (newId == BACKGROUND.id) {
                 newId = getRandBackground()
             }
-            BACKGROUND.image.src = `../images/background/City${newId}.png`;
-            BACKGROUND.id = newId;
+            let newBG = new Image();
+            newBG.src = `../images/background/City${newId}.png`;
+            newBG.onload(function() {
+                BACKGROUND.image = newBG
+                BACKGROUND.id = newId;
+            })
         }
     }, 30000)
     setInterval(() => {
