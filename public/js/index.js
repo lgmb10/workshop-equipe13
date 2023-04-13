@@ -217,7 +217,7 @@ function start() {
             let newItem = createItem(gameArea.offsetWidth, health);
             itemsList.push(newItem);
         }
-        interval = Math.round(Math.random() * 2000 + 200);
+        interval = Math.round(Math.random() * 2000 + 200 - gameSpeed*100);
         items = setInterval(() => {
             itemsInterval();
         }, interval);
@@ -226,7 +226,7 @@ function start() {
         itemsInterval();
     }, interval);
     setInterval(() => {
-        if (gameOnGoing) gameSpeed += 0.5;
+        if (gameOnGoing && gameSpeed < 80) gameSpeed += 0.5;
     }, 8000)
     function getRandBackground() {
         return Math.floor((Math.random() * 4) + 1)
