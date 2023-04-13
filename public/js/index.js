@@ -210,14 +210,19 @@ function start() {
             timeContainer.innerHTML = `temps : ${time.toFixed(1)} s`;
         }
     }, 100)
-    let interval = Math.round(Math.random() * 2000 + 200);
+    let interval = Math.round(Math.random() * 2000);
     function itemsInterval() {
         clearInterval(items)
         if (gameOnGoing) {
-            let newItem = createItem(gameArea.offsetWidth, health);
-            itemsList.push(newItem);
+            if (itemsList.length > 0 && (itemsList[itemsList.length-1].x + itemsList[itemsList.length-1].width) > gameArea.offsetWidth) {
+                let newItem = createItem(itemsList[itemsList.length-1].x + itemsList[itemsList.length-1].width, health);
+                itemsList.push(newItem);
+            } else {
+                let newItem = createItem(gameArea.offsetWidth, health);
+                itemsList.push(newItem);
+            }
         }
-        interval = Math.round(Math.random() * 2000 + 200 - gameSpeed*100);
+        interval = Math.floor(Math.random() * 2000 - gameSpeed*50);
         items = setInterval(() => {
             itemsInterval();
         }, interval);
