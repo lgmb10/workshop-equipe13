@@ -35,7 +35,7 @@ let posRun = 1;
 let posHurt = 1;
 let posDeath = 1;
 let playerSizeMultiplier = 2.5
-let gameSpeed = 4.5;
+let gameSpeed = 2;
 let time = 0.0;
 let gameOnGoing = false;
 let isAlive = true;
@@ -58,7 +58,7 @@ function handlePlayer() {
             posHurt >= hurt.length && (posHurt = 0, isHurt = false);
             animate(posHurt, hurt, { x: 50, y: 100 }, context, playerSizeMultiplier);
         } else {
-            if (gameSpeed >= 6) {
+            if (gameSpeed >= 3.5) {
                 posRun >= run.length && (posRun = 0);
                 animate(posRun, run, { x: 50, y: 100 }, context, playerSizeMultiplier);
             } else {
@@ -132,7 +132,7 @@ function handleItems() {
                     createShortLivedMessage("Vous avez obtenu une vie supplémentaire !");
                 }
                 else if (item.type == 'reduceSpeed') {
-                    if (gameSpeed > 4) {
+                    if (gameSpeed >= 2) {
                         potionSound.play();
                         createShortLivedMessage("La vitesse est ralenti pendant un court instant !");
                         let oldSpeed = gameSpeed;
@@ -192,7 +192,7 @@ function start() {
             if (isHurt) {
                 posHurt++;
             } else {
-                if (gameSpeed >= 6) {
+                if (gameSpeed >= 3.5) {
                     posRun++;
                 } else {
                     posWalk++;
@@ -202,7 +202,7 @@ function start() {
     }, 120);
     setInterval(() => {
         game();
-    }, 20);
+    }, 5);
     setInterval(() => {
         if (gameOnGoing) {
             time += 0.1;
@@ -231,8 +231,8 @@ function start() {
         itemsInterval();
     }, interval);
     setInterval(() => {
-        if (gameOnGoing && gameSpeed < 80) gameSpeed += 0.5;
-    }, 8000)
+        if (gameOnGoing) gameSpeed += 0.25;
+    }, 10000)
     function getRandBackground() {
         return Math.floor((Math.random() * 4) + 1)
     }
